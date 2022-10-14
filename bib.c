@@ -10,7 +10,7 @@ typedef struct maillon *pointer;
 void alocate(pointer *p)
 {
      *p = (maillon*)malloc(sizeof(maillon));
-     (*p)->next = NULL;
+    (*p)->next = NULL;
 
 }
 void free_it(pointer p)
@@ -20,7 +20,7 @@ void free_it(pointer p)
 
 pointer to_next(pointer p)
 {
-     return(p->next);
+    return(p->next);
 }
 int value(pointer p)
 {
