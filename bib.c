@@ -4,7 +4,7 @@
 
 // Allouche Imene - Khadir Amina G1 representaion 1
 
-//déclaration du pointeur vers le maillon de la 1ère représentation
+//declaration du pointeur vers le maillon de la 1ï¿½re reprï¿½sentation
 typedef struct maillon *pointer;
 // la machine abstraite
 void alocate(pointer *p)
@@ -57,7 +57,7 @@ void ask_for_matrix(pointer *start ,int lines, int columns)
 {
     // i <==> nombre de ligne de la matrice
     // j <==> nombre de colones de la matrice
-    // number <==> la valeur du maillon à créer
+    // number <==> la valeur du maillon ï¿½ crï¿½er
     int i,j,number;
 
     for (i=0  ;i<lines ;i++)
@@ -67,7 +67,7 @@ void ask_for_matrix(pointer *start ,int lines, int columns)
             printf("matrix[%i][%i] = ",i,j);
             scanf("%i",&number);
 
-            //si la valeur n'est pas nulle on crée un maillon
+            //si la valeur n'est pas nulle on crï¿½e un maillon
             if (number!=0)
             {
                 create_new_node(start,i,j,number);
@@ -76,12 +76,12 @@ void ask_for_matrix(pointer *start ,int lines, int columns)
         }
         printf("\n");
     }}
-//créer un maillon pour les valeurs non nulles
+//crï¿½er un maillon pour les valeurs non nulles
 void create_new_node(pointer *start, int row,int column,int non_zero_element)
 {
     pointer ptr, temp;
 
-    //allouer l'espace pour le maillon à chainer
+    //allouer l'espace pour le maillon ï¿½ chainer
     alocate(&temp);
         if(temp==NULL)
         {
@@ -91,7 +91,7 @@ void create_new_node(pointer *start, int row,int column,int non_zero_element)
 
 
 
-    //remplir les champs du maillon par les données
+    //remplir les champs du maillon par les donnï¿½es
     aff_adr(&temp,NULL);
     aff_value(&temp,non_zero_element);
     aff_line(&temp,row);
@@ -104,7 +104,7 @@ void create_new_node(pointer *start, int row,int column,int non_zero_element)
             *start=temp;
         }
 
-      //sinon on parcours la liste jusqu'à la fin
+      //sinon on parcours la liste jusqu'ï¿½ la fin
       else
         {
                 ptr=*start;
@@ -113,7 +113,7 @@ void create_new_node(pointer *start, int row,int column,int non_zero_element)
                         ptr=to_next(ptr);
                 }
 
-                //on insère le maillon à la fin
+                //on insï¿½re le maillon ï¿½ la fin
                 aff_adr(&ptr,temp);
         }
 }
@@ -126,7 +126,7 @@ void PrintList(pointer *start,int lines_number, int columns_number)
         int i,j;
 
 
-        //si la liste est vide on affiche directement que des zéros
+        //si la liste est vide on affiche directement que des zï¿½ros
         if(*start==NULL)
         {
             for (i=0  ;  i<lines_number ; i++)
@@ -170,7 +170,7 @@ void PrintList(pointer *start,int lines_number, int columns_number)
 //creation de la sous matrice
 void matrix_transposee(pointer *new_head, pointer *start)
 {
-    //si la liste est vide alors on retourne directement la variable pointer *new_head comme étant un pointer NIL
+    //si la liste est vide alors on retourne directement la variable pointer *new_head comme ï¿½tant un pointer NIL
     if(*start==NULL)
     {
         exit(0);
@@ -182,8 +182,8 @@ void matrix_transposee(pointer *new_head, pointer *start)
     {
         pointer here;
         here =*start;
-        // on parcours la liste et on inverse le numéro de ligne et de colone à chaque reprise
-        //on les insère dans la place convenable grace à la foncion insert_node_order
+        // on parcours la liste et on inverse le numï¿½ro de ligne et de colone ï¿½ chaque reprise
+        //on les insï¿½re dans la place convenable grace ï¿½ la foncion insert_node_order
         while(here!=NULL)
         {
             insert_node_order(new_head ,line_number(here),column_number(here),value(here));
@@ -198,7 +198,7 @@ void insert_node_order(pointer *new_head , int line, int column, int value)
 {
     pointer temp,ptr;
 
-    //alloueur le maillon à inserer
+    //alloueur le maillon ï¿½ inserer
     alocate(&temp);
     if(temp==NULL)
     {
@@ -206,7 +206,7 @@ void insert_node_order(pointer *new_head , int line, int column, int value)
         exit(0);
     }
 
-    //remplir les champ du maillon par les données
+    //remplir les champ du maillon par les donnï¿½es
     aff_adr(&temp,NULL);
     aff_value(&temp,value);
     aff_line(&temp,column);
@@ -224,7 +224,7 @@ void insert_node_order(pointer *new_head , int line, int column, int value)
     else
     {
         ptr=*new_head;
-        //insertion au début si l'emplacement du maillon deverait etre avant l'emplacement du maillon qui se retrouve dans la tete
+        //insertion au dï¿½but si l'emplacement du maillon deverait etre avant l'emplacement du maillon qui se retrouve dans la tete
         if ((line_number(ptr)>column) || (line_number(ptr)==column && column_number(ptr)>line))
         {
             aff_adr(&temp,*new_head);
@@ -233,16 +233,16 @@ void insert_node_order(pointer *new_head , int line, int column, int value)
         }
 
 
-        //insertion au milieu/fin par rapport à la valeur de ligne et colone du maillon (emplacement dans la liste)
+        //insertion au milieu/fin par rapport ï¿½ la valeur de ligne et colone du maillon (emplacement dans la liste)
         else
         {
-            //on parcours jusq'à y arriver au bon emplacement
+            //on parcours jusq'ï¿½ y arriver au bon emplacement
             while(to_next(ptr)!=NULL && ((line_number(ptr)<column) || (line_number(ptr)==column && column_number(ptr)<line-1)))
             {
                 ptr=to_next(ptr);
             }
 
-            //on insère le maillon dans l'emplacement convenable
+            //on insï¿½re le maillon dans l'emplacement convenable
             aff_adr(&temp,to_next(ptr));
             aff_adr(&ptr, temp);
         }
@@ -252,32 +252,32 @@ void insert_node_order(pointer *new_head , int line, int column, int value)
 
 void extraction_submatrix(pointer *new_head, pointer *start ,int lines , int columns)
 {
-    //dl <==> la ligne de départ
-    //dc <==> la colone de départ
-    //al <==> la ligne d'arrivée
-    //ac <==> la colone d'arrivée
+    //dl <==> la ligne de dï¿½part
+    //dc <==> la colone de dï¿½part
+    //al <==> la ligne d'arrivï¿½e
+    //ac <==> la colone d'arrivï¿½e
     int dl,dc,al,ac;
 
-    //éditer les valeurs des lignes et colones de départ et d'arrivée
+    //ï¿½diter les valeurs des lignes et colones de dï¿½part et d'arrivï¿½e
     submatrix_conditions(&dl,&dc,&al,&ac,lines,columns);
 
     pointer ptr;
     ptr=*start;
 
-    //parcourir la matrice de départ
+    //parcourir la matrice de dï¿½part
     while(ptr!=NULL && (line_number(ptr)<al || (line_number(ptr)== al && column_number(ptr)<=ac)))
     {
         //on extrait que les maillons qui sont entre [dl,al] et [dc,ac]
         if (line_number(ptr)>=dl && column_number(ptr)>=dc && column_number(ptr)<=ac)
-            //creer le maillon en mettant à jour les nouvelles valeur des numéros de lignes et colones
+            //creer le maillon en mettant ï¿½ jour les nouvelles valeur des numï¿½ros de lignes et colones
             create_new_node(new_head,line_number(ptr)-dl, column_number(ptr)-dc,value(ptr));
 
         ptr=to_next(ptr);
     }
 
 
-    printf("la sous-matrice a été crée dynamiquement avec succés etes vous sur de vous contenter de ça sans l'afficher? \n");
-    printf("si vous voulez l'afficher pour vérifier sa création tapez y sinon n : ");
+    printf("la sous-matrice a ï¿½tï¿½ crï¿½e dynamiquement avec succï¿½s etes vous sur de vous contenter de ï¿½a sans l'afficher? \n");
+    printf("si vous voulez l'afficher pour vï¿½rifier sa crï¿½ation tapez y sinon n : ");
     char answer;
     scanf(" %c",&answer);
     if (answer =='y')
@@ -288,65 +288,65 @@ void extraction_submatrix(pointer *new_head, pointer *start ,int lines , int col
     }
 }
 
-//éles conditions sur la lignes et colone de départ et d'arrivée
+//ï¿½les conditions sur la lignes et colone de dï¿½part et d'arrivï¿½e
 void submatrix_conditions(int* dl,int*dc,int*al,int*ac,int lines , int columns)
 {
 
-    //dl <==> la ligne de départ
-    //dc <==> la colone de départ
-    //al <==> la ligne d'arrivée
-    //ac <==> la colone d'arrivée
+    //dl <==> la ligne de dï¿½part
+    //dc <==> la colone de dï¿½part
+    //al <==> la ligne d'arrivï¿½e
+    //ac <==> la colone d'arrivï¿½e
 
-     printf("extraction d'une sous matrice aura besoin d'un point de départ et d'arrivé...\n");
+     printf("extraction d'une sous matrice aura besoin d'un point de dï¿½part et d'arrivï¿½...\n");
 
-     printf("ligne de départ: ");
+     printf("ligne de dï¿½part: ");
      scanf("%i",dl);
      while(*dl>lines-1)
      {
-         printf("dépassement de nombre de lignes de matrice saisie, saisissez une ligne de départ plus petite:");
+         printf("dï¿½passement de nombre de lignes de matrice saisie, saisissez une ligne de dï¿½part plus petite:");
          scanf("%i",dl);
      }
 
 
 
-     printf("colone de départ: ");
+     printf("colone de dï¿½part: ");
      scanf("%i",dc);
      while(*dc>columns-1)
      {
-         printf("dépassement de nombre de colones de matrice saisie, saisissez une colone de départ plus petite:");
+         printf("dï¿½passement de nombre de colones de matrice saisie, saisissez une colone de dï¿½part plus petite:");
          scanf("%i",dc);
      }
 
 
-     printf("ligne d'arrivée: ");
+     printf("ligne d'arrivï¿½e: ");
      scanf("%i",al);
      while(*al>lines-1 || *al<*dl)
      {
          if(*al>lines-1)
          {
-                printf("dépassement de nombre de lignes de matrice saisie, saisissez une ligne d'arrivée plus petite:");
+                printf("dï¿½passement de nombre de lignes de matrice saisie, saisissez une ligne d'arrivï¿½e plus petite:");
                 scanf("%i",al);
          }
          else
          {
-                printf("la ligne de d'arrivée doit etre supérieure ou égale à la ligne de départ try another: ");
+                printf("la ligne de d'arrivï¿½e doit etre supï¿½rieure ou ï¿½gale ï¿½ la ligne de dï¿½part try another: ");
                 scanf("%i",al);
          }
      }
 
 
-     printf("colone d'arrivée: ");
+     printf("colone d'arrivï¿½e: ");
      scanf("%i",ac);
      while(*ac>columns-1 || (*ac<*dc))
      {
          if (*ac>columns-1)
          {
-            printf("dépassement de nombre de colones de matrice saisie, saisissez une colone d'arrivée plus petite:");
+            printf("dï¿½passement de nombre de colones de matrice saisie, saisissez une colone d'arrivï¿½e plus petite:");
             scanf("%i",ac);
          }
          else
          {
-            printf("la colone d'arrivé doit etre supérieure ou égale à la colone de départ, try another: ");
+            printf("la colone d'arrivï¿½ doit etre supï¿½rieure ou ï¿½gale ï¿½ la colone de dï¿½part, try another: ");
             scanf("%i",ac);
          }
      }
@@ -370,7 +370,7 @@ pointer add_matrixes(pointer *first_matrix , pointer *second_matrix , int lines,
                     //si le nombre de ligne et colones des deux maillons sont identiques
                     if(line_number(ptr1)==line_number(ptr2) && column_number(ptr1)==column_number(ptr2))
                     {
-                        //on crée le maillon et la valeur de son champ est égale à la somme des valeurs du champ value des deux matrices
+                        //on crï¿½e le maillon et la valeur de son champ est ï¿½gale ï¿½ la somme des valeurs du champ value des deux matrices
                         create_new_node(&result,line_number(ptr1),column_number(ptr1),value(ptr1)+value(ptr2));
 
                         //on avance dans les deux listes avec un pas (maillon)
@@ -382,10 +382,10 @@ pointer add_matrixes(pointer *first_matrix , pointer *second_matrix , int lines,
                     //sinon
                     else
                     {
-                        //si le maillon de 1ère liste a un emplacement inférieur à celui de la 2ème liste
+                        //si le maillon de 1ï¿½re liste a un emplacement infï¿½rieur ï¿½ celui de la 2ï¿½me liste
                         if (line_number(ptr1)<line_number(ptr2) || (line_number(ptr1)==line_number(ptr2) && column_number(ptr1)<column_number(ptr2)))
                         {
-                            //on crée le maillon correspendannt au maillon de la 1ème liste
+                            //on crï¿½e le maillon correspendannt au maillon de la 1ï¿½me liste
                             //la valeur du champs value == valeur du champs value du maillon de la 1ere liste
                             create_new_node(&result,line_number(ptr1),column_number(ptr1),value(ptr1));
                             //on avance que dans la 1ere liste
@@ -393,10 +393,10 @@ pointer add_matrixes(pointer *first_matrix , pointer *second_matrix , int lines,
                         }
 
 
-                        //sinon si le maillon de 2ème liste a un emplacement inférieur à celui de la 1ème liste
+                        //sinon si le maillon de 2ï¿½me liste a un emplacement infï¿½rieur ï¿½ celui de la 1ï¿½me liste
                         else
                         {
-                            //on crée le maillon correspendannt au maillon de la 2ème liste
+                            //on crï¿½e le maillon correspendannt au maillon de la 2ï¿½me liste
                             //la valeur du champs value == valeur du champs value du maillon de la 2eme liste
                             create_new_node(&result,line_number(ptr2),column_number(ptr2),value(ptr2));
                             //on avance que dans la 2eme liste
@@ -406,18 +406,18 @@ pointer add_matrixes(pointer *first_matrix , pointer *second_matrix , int lines,
                 }
 
 
-                //tant qu'on est pas arrivé à la fin de la 1ère liste
+                //tant qu'on est pas arrivï¿½ ï¿½ la fin de la 1ï¿½re liste
                 while (ptr1 !=NULL)
                 {
-                        //on crée les maillons correspendants aux maillons restants de la la 1ère liste
+                        //on crï¿½e les maillons correspendants aux maillons restants de la la 1ï¿½re liste
                         create_new_node(&result,line_number(ptr1),column_number(ptr1),value(ptr1));
                         ptr1=to_next(ptr1);
                 }
 
-                //tant qu'on est pas arrivé à la fin de la 2ème liste
+                //tant qu'on est pas arrivï¿½ ï¿½ la fin de la 2ï¿½me liste
                 while (ptr2 !=NULL)
                 {
-                    //on crée les maillons correspendants aux maillons restants de la la 2ème liste
+                    //on crï¿½e les maillons correspendants aux maillons restants de la la 2ï¿½me liste
                     create_new_node(&result,line_number(ptr2),column_number(ptr2),value(ptr2));
                     ptr2=to_next(ptr2);
                 }
@@ -446,7 +446,7 @@ void operation_or(pointer *first_matrix ,pointer* second_matrix , pointer *resul
         //si le nombre de ligne et colones des deux maillons sont identiques
         if(line_number(ptr1)==line_number(ptr2) && column_number(ptr1)==column_number(ptr2))
         {
-           //on crée le maillon et la valeur de son champ est égale à 1
+           //on crï¿½e le maillon et la valeur de son champ est ï¿½gale ï¿½ 1
            create_new_node(result,line_number(ptr1),column_number(ptr1),1);
            //on avance dans les deux listes avec un pas (maillon)
            ptr1=to_next(ptr1);
@@ -456,21 +456,21 @@ void operation_or(pointer *first_matrix ,pointer* second_matrix , pointer *resul
 
         else
         {
-            //sinon si le maillon de 1ère liste a un emplacement inférieur à celui de la 2ème liste
+            //sinon si le maillon de 1ï¿½re liste a un emplacement infï¿½rieur ï¿½ celui de la 2ï¿½me liste
             if (line_number(ptr1)<line_number(ptr2) || (line_number(ptr1)==line_number(ptr2) && column_number(ptr1)<column_number(ptr2)))
             {
-                //on crée le maillon correspendannt au maillon de la 1ème liste
-                //la valeur du champs value  est égale à 1
+                //on crï¿½e le maillon correspendannt au maillon de la 1ï¿½me liste
+                //la valeur du champs value  est ï¿½gale ï¿½ 1
                 create_new_node(result,line_number(ptr1),column_number(ptr1),1);
                 //on avance que dans la 1ere liste
                 ptr1=to_next(ptr1);
             }
 
-            //sinon si le maillon de 2ème liste a un emplacement inférieur à celui de la 1ème liste
+            //sinon si le maillon de 2ï¿½me liste a un emplacement infï¿½rieur ï¿½ celui de la 1ï¿½me liste
             else
             {
-                //on crée le maillon correspendannt au maillon de la 2ème liste
-                //la valeur du champs value est égale à 1
+                //on crï¿½e le maillon correspendannt au maillon de la 2ï¿½me liste
+                //la valeur du champs value est ï¿½gale ï¿½ 1
                 create_new_node(result,line_number(ptr2),column_number(ptr2),1);
                 //on avance que dans la 2eme liste
                 ptr2=to_next(ptr2);
@@ -478,18 +478,18 @@ void operation_or(pointer *first_matrix ,pointer* second_matrix , pointer *resul
         }
     }
 
-    //tant qu'on est pas arrivé à la fin de la 1ère liste
+    //tant qu'on est pas arrivï¿½ ï¿½ la fin de la 1ï¿½re liste
     while (ptr1 !=NULL)
     {
-            //on crée les maillons correspendants aux maillons restants de la la 1ère liste
+            //on crï¿½e les maillons correspendants aux maillons restants de la la 1ï¿½re liste
             create_new_node(result,line_number(ptr1),column_number(ptr1),1);
             ptr1=to_next(ptr1);
     }
 
-    //tant qu'on est pas arrivé à la fin de la 2ème liste
+    //tant qu'on est pas arrivï¿½ ï¿½ la fin de la 2ï¿½me liste
     while (ptr2 !=NULL)
     {
-        //on crée les maillons correspendants aux maillons restants de la la 2ème liste
+        //on crï¿½e les maillons correspendants aux maillons restants de la la 2ï¿½me liste
         create_new_node(result,line_number(ptr2),column_number(ptr2),1);
         ptr2=to_next(ptr2);
     }
@@ -508,7 +508,7 @@ void operation_oux(pointer *first_matrix ,pointer* second_matrix , pointer *resu
         //si le nombre de ligne et colones des deux maillons sont identiques
         if(line_number(ptr1)==line_number(ptr2) && column_number(ptr1)==column_number(ptr2))
         {
-            //on avance dans les deux listes avec un pas (maillon) sans créer le maillon
+            //on avance dans les deux listes avec un pas (maillon) sans crï¿½er le maillon
             ptr1=to_next(ptr1);
             ptr2=to_next(ptr2);
         }
@@ -516,19 +516,19 @@ void operation_oux(pointer *first_matrix ,pointer* second_matrix , pointer *resu
         //sinon
         else
         {
-            //si le maillon de 1ère liste a un emplacement inférieur à celui de la 2ème liste
+            //si le maillon de 1ï¿½re liste a un emplacement infï¿½rieur ï¿½ celui de la 2ï¿½me liste
             if (line_number(ptr1)<line_number(ptr2) || (line_number(ptr1)==line_number(ptr2) && column_number(ptr1)<column_number(ptr2)))
             {
-                //on crée le maillon correspendannt au maillon de la 1ème liste avec une valeur de 1
+                //on crï¿½e le maillon correspendannt au maillon de la 1ï¿½me liste avec une valeur de 1
                 create_new_node(result,line_number(ptr1),column_number(ptr1),1);
                 //on avance que dans la 1ere liste
                 ptr1=to_next(ptr1);
             }
 
-            //sinon si le maillon de 2ème liste a un emplacement inférieur à celui de la 1ème liste
+            //sinon si le maillon de 2ï¿½me liste a un emplacement infï¿½rieur ï¿½ celui de la 1ï¿½me liste
             else
             {
-                //on crée le maillon correspendannt au maillon de la 2ème liste avec une valeur de 1
+                //on crï¿½e le maillon correspendannt au maillon de la 2ï¿½me liste avec une valeur de 1
                 create_new_node(result,line_number(ptr2),column_number(ptr2),1);
                 //on avance que dans la 2eme liste
                 ptr2=to_next(ptr2);
@@ -538,18 +538,18 @@ void operation_oux(pointer *first_matrix ,pointer* second_matrix , pointer *resu
 
 
 
-    //tant qu'on est pas arrivé à la fin de la 1ère liste
+    //tant qu'on est pas arrivï¿½ ï¿½ la fin de la 1ï¿½re liste
     while (ptr1 !=NULL)
     {
-            //on crée les maillons correspendants aux maillons restants de la la 1ère liste
+            //on crï¿½e les maillons correspendants aux maillons restants de la la 1ï¿½re liste
             create_new_node(result,line_number(ptr1),column_number(ptr1),1);
             ptr1=to_next(ptr1);
     }
 
-    //tant qu'on est pas arrivé à la fin de la 2ème liste
+    //tant qu'on est pas arrivï¿½ ï¿½ la fin de la 2ï¿½me liste
     while (ptr2 !=NULL)
     {
-        //on crée les maillons correspendants aux maillons restants de la la 2ème liste
+        //on crï¿½e les maillons correspendants aux maillons restants de la la 2ï¿½me liste
         create_new_node(result,line_number(ptr2),column_number(ptr2),1);
         ptr2=to_next(ptr2);
     }
@@ -568,7 +568,7 @@ void operation_et(pointer *first_matrix ,pointer* second_matrix , pointer *resul
         //si le nombre de ligne et colones des deux maillons sont identiques
         if(line_number(ptr1)==line_number(ptr2) && column_number(ptr1)==column_number(ptr2))
         {
-            //on crée le maillon correspendannt au maillon des deux listes
+            //on crï¿½e le maillon correspendannt au maillon des deux listes
             create_new_node(result,line_number(ptr1),column_number(ptr1),1);
             //on avance dans les deux listes avec un pas (maillon)
             ptr1=to_next(ptr1);
@@ -577,12 +577,12 @@ void operation_et(pointer *first_matrix ,pointer* second_matrix , pointer *resul
 
         else
         {
-            //si le maillon de 1ère liste a un emplacement inférieur à celui de la 2ème liste
+            //si le maillon de 1ï¿½re liste a un emplacement infï¿½rieur ï¿½ celui de la 2ï¿½me liste
             if (line_number(ptr1)<line_number(ptr2) || (line_number(ptr1)==line_number(ptr2) && column_number(ptr1)<column_number(ptr2)))
                 //on avance que dans la 1ere liste
                 ptr1=to_next(ptr1);
 
-            //sinon si le maillon de 2ème liste a un emplacement inférieur à celui de la 1ème liste
+            //sinon si le maillon de 2ï¿½me liste a un emplacement infï¿½rieur ï¿½ celui de la 1ï¿½me liste
             else
                 //on avance que dans la 2eme liste
                 ptr2=to_next(ptr2);
@@ -615,14 +615,14 @@ void operation_non(pointer *start, pointer *result, int lines, int columns)
 void division_sous_bloc_conditions(int lines, int columns, int *line_size, int *column_size)
 {
 
-    //line_size <==> le nombre de ligne demandé dans les sous-blocs
-    //column_size <==> le nombre de colones demandé dans les sous-blocs
+    //line_size <==> le nombre de ligne demandï¿½ dans les sous-blocs
+    //column_size <==> le nombre de colones demandï¿½ dans les sous-blocs
 
     printf("combien de lignes vous voulez avoir dans vos sous-blocs: ");
     scanf("%i",line_size);
     while(lines % (*line_size) !=0)
     {
-        printf("ça devait etre un multiple de nombre de ligne de la matrice mère try again: ");
+        printf("ï¿½a devait etre un multiple de nombre de ligne de la matrice mï¿½re try again: ");
         scanf("%i",line_size);
     }
 
@@ -632,29 +632,29 @@ void division_sous_bloc_conditions(int lines, int columns, int *line_size, int *
 
     while(columns % (*column_size) !=0)
     {
-        printf("ça devait etre un multiple de nombre de colone de la matrice mère try again: ");
+        printf("ï¿½a devait etre un multiple de nombre de colone de la matrice mï¿½re try again: ");
         scanf("%i",line_size);
     }
 }
 
 void division_sous_bloc(pointer *start, int lines, int columns)
 {
-    //line_size <==> le nombre de ligne demandé dans les sous-blocs
-    //column_size <==> le nombre de colones demandé dans les sous-blocs
+    //line_size <==> le nombre de ligne demandï¿½ dans les sous-blocs
+    //column_size <==> le nombre de colones demandï¿½ dans les sous-blocs
     int line_size, column_size;
 
-    //récupérer les valeurs de line_size et column_size
+    //rï¿½cupï¿½rer les valeurs de line_size et column_size
     division_sous_bloc_conditions(lines,columns,&line_size,&column_size);
 
 
-    //le nombre de sous blocs est égale à:
+    //le nombre de sous blocs est ï¿½gale ï¿½:
     int blocs =(lines / line_size) * (columns / column_size);
 
-    //stocker les tete des sous blocs crées dans un tableau
+    //stocker les tete des sous blocs crï¿½es dans un tableau
     pointer headers_list[blocs];
 
 
-    //initialiser les listes des sous blocs à des listes vide NIL
+    //initialiser les listes des sous blocs ï¿½ des listes vide NIL
     int i;
     for (i=0  ;i<blocs  ;i++)
     {
@@ -666,10 +666,10 @@ void division_sous_bloc(pointer *start, int lines, int columns)
     //parcourir la liste
     while (ptr!=NULL)
     {
-        //i est l'index ou stocker le maillon dans l'index spécifié dans le tableau
-        //i est donné par l'equation:
+        //i est l'index ou stocker le maillon dans l'index spï¿½cifiï¿½ dans le tableau
+        //i est donnï¿½ par l'equation:
         i=(columns/column_size)*(line_number(ptr)/line_size)+(column_number(ptr)/column_size);
-        //creer le maillon avec mise à jour du numérode ligne et colone de chaque maillon
+        //creer le maillon avec mise ï¿½ jour du numï¿½rode ligne et colone de chaque maillon
         create_new_node(&headers_list[i] ,(line_number(ptr)%line_size),(column_number(ptr)%column_size),value(ptr));
         ptr = to_next(ptr);
     }
@@ -678,16 +678,16 @@ void division_sous_bloc(pointer *start, int lines, int columns)
 
 
 
-    //afficher les sous blocs crées
-    printf("\n\nles sous-blocs ont été crées dynamiquement avec succés etes vous sur de vous contenter de ça sans les afficher? \n");
-    printf("si vous voulez les afficher pour vérifier leurs création tapez y sinon n : ");
+    //afficher les sous blocs crï¿½es
+    printf("\n\nles sous-blocs ont ï¿½tï¿½ crï¿½es dynamiquement avec succï¿½s etes vous sur de vous contenter de ï¿½a sans les afficher? \n");
+    printf("si vous voulez les afficher pour vï¿½rifier leurs crï¿½ation tapez y sinon n : ");
     char answer;
     scanf(" %c",&answer);
     if (answer =='y')
     {
         for (i=0  ;i<blocs  ;i++)
         {
-            printf("\n\n le sous blocs numéro %i: \n",i);
+            printf("\n\n le sous blocs numï¿½ro %i: \n",i);
             PrintList(&headers_list[i],line_size,column_size);
         }
     }
@@ -698,7 +698,7 @@ void search_the_node(pointer *start,int row, int column,pointer* node,int*found)
    pointer ptr;
    *found=1;
    ptr=*start;
-   //tantt qu'on est pas arrivé à l'emplacement du maillon on avance
+   //tantt qu'on est pas arrivï¿½ ï¿½ l'emplacement du maillon on avance
    while(ptr!=NULL && ((line_number(ptr)<row || (line_number(ptr)==row && column_number(ptr)<column))))
        ptr=to_next(ptr);
 
@@ -712,7 +712,7 @@ void search_the_node(pointer *start,int row, int column,pointer* node,int*found)
 void multiply_matrixes(pointer* first_matrix, pointer* second_matrix, pointer *result ,int lines,int colines,int columns)
 {
     // lines <==> nombre de ligne de la 1ere matrice
-    // collines <==> nombre de colone de la 1ere matrice (nombre de lignes de la 2eme matrice également)
+    // collines <==> nombre de colone de la 1ere matrice (nombre de lignes de la 2eme matrice ï¿½galement)
     // columns<==> nombre de colones de la 2eme matrice
     pointer node1,node2;
     int i,j,k,sum,found1,found2;
@@ -732,7 +732,7 @@ void multiply_matrixes(pointer* first_matrix, pointer* second_matrix, pointer *r
             }
 
             if (sum != 0)
-                //si le resultat n'est pas nulle on crée le maillon
+                //si le resultat n'est pas nulle on crï¿½e le maillon
                 create_new_node(result,i,j,sum);
         }
     }
@@ -740,7 +740,7 @@ void multiply_matrixes(pointer* first_matrix, pointer* second_matrix, pointer *r
 }
 
 
-//libérer une liste
+//libï¿½rer une liste
 void freeList(pointer *start)
 {
    pointer tmp;
@@ -754,7 +754,7 @@ void freeList(pointer *start)
     }
 }
 
-//afficher les maillons crées de la liste
+//afficher les maillons crï¿½es de la liste
 void display(pointer *start)
 {
         pointer ptr;
@@ -765,7 +765,7 @@ void display(pointer *start)
                 return;
         }
 
-        //sinon on parcourt la liste et à chaque fois on indique les champs ligne, colone et valeur crées
+        //sinon on parcourt la liste et ï¿½ chaque fois on indique les champs ligne, colone et valeur crï¿½es
         else
         {
                 ptr=*start;
@@ -792,28 +792,28 @@ void Menu_1()
     printf("    *************************************************\n\n\n");
 
     printf("veuillez consulter nos diverses fonctions et en choisir une:\n");
-    printf("\n    1-  Lecture d'une matrice creuse entière\n");
-    printf("\n    2-  Affichage d'une matrice creuse entière\n");
+    printf("\n    1-  Lecture d'une matrice creuse entiï¿½re\n");
+    printf("\n    2-  Affichage d'une matrice creuse entiï¿½re\n");
     printf("\n    3-  Extraction d'une sous matrice\n");
-    printf("\n    4-  Division d'une matrice en sous-blocs de taille égale\n");
-    printf("\n    5-  Transposée d'une matrice\n");
+    printf("\n    4-  Division d'une matrice en sous-blocs de taille ï¿½gale\n");
+    printf("\n    5-  Transposï¿½e d'une matrice\n");
     printf("\n    6-  Addition de deux ou plusieurs matrices\n");
     printf("\n    7-  Multiplication de deux matrices\n");
-    printf("\n    8-  Opérations logiques : NON\n");
-    printf("\n    9-  Opérations logiques : ET\n");
-    printf("\n    10-  Opérations logiques : OU\n");
-    printf("\n    11-  Opérations logiques : OUX\n");
+    printf("\n    8-  Opï¿½rations logiques : NON\n");
+    printf("\n    9-  Opï¿½rations logiques : ET\n");
+    printf("\n    10-  Opï¿½rations logiques : OU\n");
+    printf("\n    11-  Opï¿½rations logiques : OUX\n");
 
 
 
 
     //le choix des options
-    printf("\n\nsaisissez le numéro de votre option: ");
+    printf("\n\nsaisissez le numï¿½ro de votre option: ");
     int option;
     scanf(" %i",&option);
     while (option<1 || option>11)
     {
-        printf("pas d'option correspondante à un tel numéro saisissez un autre: ");
+        printf("pas d'option correspondante ï¿½ un tel numï¿½ro saisissez un autre: ");
         scanf(" %i",&option);
     }
 
@@ -823,7 +823,7 @@ void Menu_1()
 
 
 
-            printf("\nsuper! maintenant pour créer la matrice on aura besoin de plus d'info sur celle ci: \n\n");
+            printf("\nsuper! maintenant pour crï¿½er la matrice on aura besoin de plus d'info sur celle ci: \n\n");
             printf("nombre de lignes : ");
             int lines;
             scanf("%i",&lines);
@@ -848,8 +848,8 @@ void Menu_1()
                                         printf("    *   Lecture et creation de la matrice creuse:   *\n");
                                         printf("    *                                               *\n");
                                         printf("    *************************************************\n\n\n");
-                                        printf("\nla matrice a été crée dynamiquement avec succés etes vous sur de vous contenter de ça sans l'afficher? \n");
-                                        printf("si vous voulez l'afficher pour vérifier sa création tapez y sinon n : ");
+                                        printf("\nla matrice a ï¿½tï¿½ crï¿½e dynamiquement avec succï¿½s etes vous sur de vous contenter de ï¿½a sans l'afficher? \n");
+                                        printf("si vous voulez l'afficher pour vï¿½rifier sa crï¿½ation tapez y sinon n : ");
                                         char answer;
                                         scanf(" %c",&answer);
                                         if (answer =='y')
@@ -889,7 +889,7 @@ void Menu_1()
                                         extraction_submatrix(&submatrix_head, &start ,lines, columns);
 
 
-                                        printf("\n\n le contenu de la liste crée: \n");
+                                        printf("\n\n le contenu de la liste crï¿½e: \n");
                                         display(&submatrix_head);
 
                                         freeList(&start);
@@ -917,15 +917,15 @@ void Menu_1()
 
                                         printf("    *************************************************\n");
                                         printf("    *                                               *\n");
-                                        printf("    *    creation de la transposée de la matrice:   *\n");
+                                        printf("    *    creation de la transposï¿½e de la matrice:   *\n");
                                         printf("    *                                               *\n");
                                         printf("    *************************************************\n\n\n");
                                         pointer new_head = NULL;
                                         matrix_transposee(&new_head,&start);
 
-                                        printf("\n\n l'affichage entier de la transposée: \n");
+                                        printf("\n\n l'affichage entier de la transposï¿½e: \n");
                                         PrintList(&new_head , columns, lines);
-                                        printf("\n\n le contenu de la liste crée: \n");
+                                        printf("\n\n le contenu de la liste crï¿½e: \n");
                                         display(&new_head);
 
                                         freeList(&start);
@@ -941,7 +941,7 @@ void Menu_1()
                                         printf("    *   l'addition de deux ou plusieurs matrices    *\n");
                                         printf("    *                                               *\n");
                                         printf("    *************************************************\n\n\n");
-                                        printf("une deuxième matrice de meme taille est indisponsable inserez ses valeurs:\n");
+                                        printf("une deuxiï¿½me matrice de meme taille est indisponsable inserez ses valeurs:\n");
 
                                         pointer second_matrix=NULL;
                                         pointer result=NULL;
@@ -950,7 +950,7 @@ void Menu_1()
                                         int additions;
                                         do
                                         {
-                                            printf("nombre de matrices à additionner(supérieure ou égale à 2): ");
+                                            printf("nombre de matrices ï¿½ additionner(supï¿½rieure ou ï¿½gale ï¿½ 2): ");
                                             scanf("%i",&additions);
                                         }
                                         while(additions<2);
@@ -960,9 +960,9 @@ void Menu_1()
                                         //add_matrixes(&start,&second_matrix,&result);
                                         result=add_matrixes(&start,&second_matrix,lines,columns,additions);
 
-                                        printf("\n\n l'affichage entier du résultat de l'addition des deux matrices: \n");
+                                        printf("\n\n l'affichage entier du rï¿½sultat de l'addition des deux matrices: \n");
                                         PrintList(&result,lines, columns);
-                                        printf("\n\n le contenu de la liste crée: \n");
+                                        printf("\n\n le contenu de la liste crï¿½e: \n");
                                         display(&result);
 
                                         freeList(&start);
@@ -979,8 +979,8 @@ void Menu_1()
                                         printf("    *      la multiplication de deux matrices:      *\n");
                                         printf("    *                                               *\n");
                                         printf("    *************************************************\n\n\n");
-                                        printf("    une deuxième matrice est indispensable pour la multiplication: \n");
-                                        printf("    le nombre de lignes de celles ci égale aux nombre de colones de la première il en manque que:\n");
+                                        printf("    une deuxiï¿½me matrice est indispensable pour la multiplication: \n");
+                                        printf("    le nombre de lignes de celles ci ï¿½gale aux nombre de colones de la premiï¿½re il en manque que:\n");
                                         second_matrix=NULL;
                                         result=NULL;
 
@@ -990,9 +990,9 @@ void Menu_1()
                                         ask_for_matrix(&second_matrix,columns,col2);
                                         multiply_matrixes(&start,&second_matrix,&result,lines,columns,col2);
 
-                                        printf("\n\n l'affichage entier du résultat de la multiplication des deux matrices: \n");
+                                        printf("\n\n l'affichage entier du rï¿½sultat de la multiplication des deux matrices: \n");
                                         PrintList(&result,lines,col2);
-                                        printf("\n\n le contenu de la liste crée: \n");
+                                        printf("\n\n le contenu de la liste crï¿½e: \n");
                                         display(&result);
 
                                         freeList(&start);
@@ -1011,9 +1011,9 @@ void Menu_1()
                                         result=NULL;
                                         operation_non(&start,&result,lines,columns);
 
-                                        printf("\n\n l'affichage entier du résultat du NON logique de la matrice: \n");
+                                        printf("\n\n l'affichage entier du rï¿½sultat du NON logique de la matrice: \n");
                                         PrintList(&result,lines, columns);
-                                        printf("\n\n le contenu de la liste crée: \n");
+                                        printf("\n\n le contenu de la liste crï¿½e: \n");
                                         display(&result);
 
                                         freeList(&start);
@@ -1031,16 +1031,16 @@ void Menu_1()
                                         printf("    *           l'operation logique ET:             *\n");
                                         printf("    *                                               *\n");
                                         printf("    *************************************************\n\n\n");
-                                        printf("une deuxième matrice de meme taille est indisponsable inserez ses valeurs:\n");
+                                        printf("une deuxiï¿½me matrice de meme taille est indisponsable inserez ses valeurs:\n");
                                         second_matrix=NULL;
                                         result=NULL;
                                         ask_for_matrix(&second_matrix,lines,columns);
                                         printf("\n      ***************************************     \n\n");
                                         operation_et(&start,&second_matrix,&result);
 
-                                        printf("\n\n l'affichage entier du résultat du ET logique des deuxs matrices: \n");
+                                        printf("\n\n l'affichage entier du rï¿½sultat du ET logique des deuxs matrices: \n");
                                         PrintList(&result,lines, columns);
-                                        printf("\n\n le contenu de la liste crée: \n");
+                                        printf("\n\n le contenu de la liste crï¿½e: \n");
                                         display(&result);
 
                                         freeList(&start);
@@ -1059,16 +1059,16 @@ void Menu_1()
                                         printf("    *            l'operation logique OU:            *\n");
                                         printf("    *                                               *\n");
                                         printf("    *************************************************\n\n\n");
-                                        printf("une deuxième matrice de meme taille est indisponsable inserez ces ses valeurs:\n");
+                                        printf("une deuxiï¿½me matrice de meme taille est indisponsable inserez ces ses valeurs:\n");
                                         second_matrix=NULL;
                                         result=NULL;
                                         ask_for_matrix(&second_matrix,lines,columns);
                                         printf("\n      ***************************************     \n\n");
                                         operation_or(&start,&second_matrix,&result);
 
-                                        printf("\n\n l'affichage entier du résultat du OU logique des deuxs matrices: \n");
+                                        printf("\n\n l'affichage entier du rï¿½sultat du OU logique des deuxs matrices: \n");
                                         PrintList(&result,lines, columns);
-                                        printf("\n\n le contenu de la liste crée: \n");
+                                        printf("\n\n le contenu de la liste crï¿½e: \n");
                                         display(&result);
 
                                         freeList(&start);
@@ -1087,16 +1087,16 @@ void Menu_1()
                                         printf("    *      l'operation logique OU Exclusif:         *\n");
                                         printf("    *                                               *\n");
                                         printf("    *************************************************\n\n\n");
-                                        printf("une deuxième matrice de meme taille est indisponsable inserez ces ses valeurs:\n");
+                                        printf("une deuxiï¿½me matrice de meme taille est indisponsable inserez ces ses valeurs:\n");
                                         second_matrix=NULL;
                                         result=NULL;
                                         ask_for_matrix(&second_matrix,lines,columns);
                                         printf("\n      ***************************************     \n\n");
                                         operation_oux(&start,&second_matrix,&result);
 
-                                        printf("\n\n l'affichage entier du résultat du OU exclusif logique des deuxs matrices: \n");
+                                        printf("\n\n l'affichage entier du rï¿½sultat du OU exclusif logique des deuxs matrices: \n");
                                         PrintList(&result,lines, columns);
-                                        printf("\n\n le contenu de la liste crée: \n");
+                                        printf("\n\n le contenu de la liste crï¿½e: \n");
                                         display(&result);
 
                                         freeList(&start);
@@ -1115,7 +1115,7 @@ void Menu_1()
 //************************************************************
 // Khadir Amina - imene alouch G1
 // la 2eme representation
-// definition des type utilisés
+// definition des type utilisï¿½s
 typedef struct ligne_ll* ptr_l;
 typedef struct colone_ll* ptr_c;
 typedef struct blocs* ptr_s;
@@ -1152,7 +1152,7 @@ ptr_c suivant_c(ptr_c p) // la colone suivante d4une colone
 ptr_l suivant_l(ptr_l p) // la ligne suivante d4une ligne
 {
     return ((p)->pointeur_down);}
-ptr_c suivant_lc(ptr_l p) // la premiére colone de la ligne donnée
+ptr_c suivant_lc(ptr_l p) // la premiï¿½re colone de la ligne donnï¿½e
     {
         return ((p)->pointeur_droit);
     }
@@ -1161,7 +1161,7 @@ ptr_s suivant_b(ptr_s b)
 {
     return b->suivant;
 }
-// valeur et qutre donnés
+// valeur et qutre donnï¿½s
 int valeur_c(ptr_c p)
 {
     return((*p).val);
@@ -1218,7 +1218,7 @@ void aff_ligne(ptr_l *p,int ligne)
     (*p)->ligne = ligne;
 }
 
-// les fonctions et les procédures
+// les fonctions et les procï¿½dures
 void lecture_ll(ptr_l *tete,int *l,int *c )
  // lecture d'une matrice
 
@@ -1271,7 +1271,7 @@ void lecture_ll(ptr_l *tete,int *l,int *c )
 
 }
 void lecture_meme(ptr_l *tete,int l,int c)
- // lecture d'une matrice qui a les meme dimensions qu'une matrice donnée
+ // lecture d'une matrice qui a les meme dimensions qu'une matrice donnï¿½e
 
 {
     int j,i,v;
@@ -1317,7 +1317,7 @@ void lecture_meme(ptr_l *tete,int l,int c)
 
 }
 void lect_vect(ptr_l *V,int l)
-// lecture d'un vecteur conditionnée selon les régles de multiplication d'une matrice et un vecteur
+// lecture d'un vecteur conditionnï¿½e selon les rï¿½gles de multiplication d'une matrice et un vecteur
 
 {
      int i,v;
@@ -1453,57 +1453,57 @@ void liberer_liste(ptr_l tete)
 void condition(int lines,int columns,int*dl,int*dc,int*al,int*ac) // les conditions de l'extraction d'une sous matrice
 
 {
-     printf("extraction d'une sous matrice aura besoin d'un point de départ et d'arrivé...\n");
+     printf("extraction d'une sous matrice aura besoin d'un point de dï¿½part et d'arrivï¿½...\n");
 
-     printf("ligne de départ: ");
+     printf("ligne de dï¿½part: ");
      scanf("%i",dl);
      while(*dl>lines)
      {
-         printf("dépassement de nombre de lignes de matrice saisie, saisissez une ligne de départ plus petite:");
+         printf("dï¿½passement de nombre de lignes de matrice saisie, saisissez une ligne de dï¿½part plus petite:");
          scanf("%i",dl);
      }
 
 
 
-     printf("colone de départ: ");
+     printf("colone de dï¿½part: ");
      scanf("%i",dc);
      while(*dc>columns)
      {
-         printf("dépassement de nombre de colones de matrice saisie, saisissez une colone de départ plus petite:");
+         printf("dï¿½passement de nombre de colones de matrice saisie, saisissez une colone de dï¿½part plus petite:");
          scanf("%i",dc);
      }
 
 
-     printf("ligne d'arrivée: ");
+     printf("ligne d'arrivï¿½e: ");
      scanf("%i",al);
      while(*al>lines || *al<
            *dl)
      {
          if(*al>lines)
          {
-                printf("dépassement de nombre de lignes de matrice saisie, saisissez une ligne d'arrivée plus petite:");
+                printf("dï¿½passement de nombre de lignes de matrice saisie, saisissez une ligne d'arrivï¿½e plus petite:");
                 scanf("%i",al);
          }
          else
          {
-                printf("la ligne de d'arrivée doit etre supérieure ou égale à la ligne de départ try another: ");
+                printf("la ligne de d'arrivï¿½e doit etre supï¿½rieure ou ï¿½gale ï¿½ la ligne de dï¿½part try another: ");
                 scanf("%i",al);
          }
      }
 
 
-     printf("colone d'arrivée: ");
+     printf("colone d'arrivï¿½e: ");
      scanf("%i",ac);
      while(*ac>columns || (*dl==*al && *ac<*dc))
      {
          if (*ac>columns)
          {
-            printf("dépassement de nombre de colones de matrice saisie, saisissez une colone d'arrivée plus petite:");
+            printf("dï¿½passement de nombre de colones de matrice saisie, saisissez une colone d'arrivï¿½e plus petite:");
             scanf("%i",ac);
          }
          else
          {
-            printf("la colone d'arrivé doit etre supérieure ou égale à la colone de départ car ligne départ=ligne d'arrivé:");
+            printf("la colone d'arrivï¿½ doit etre supï¿½rieure ou ï¿½gale ï¿½ la colone de dï¿½part car ligne dï¿½part=ligne d'arrivï¿½:");
             scanf("%i",ac);
          }
      }
@@ -1553,7 +1553,7 @@ ptr_l extraire(ptr_l liste,int ligne,int colone,int ligne_depart,int colone_depa
     }
 return tete;
 }
-// les opérations logiques
+// les opï¿½rations logiques
 ptr_l et(ptr_l l1,ptr_l l2)
 
 {
@@ -1673,7 +1673,7 @@ ptr_l oux(ptr_l l1,ptr_l l2, int c)
 
 
 }
-// les opérqtions arithmétiques
+// les opï¿½rqtions arithmï¿½tiques
 ptr_l add(ptr_l l1,ptr_l l2,int l,int c,int num)
 {
 
@@ -1867,27 +1867,27 @@ void Menu_2()
     printf("    *************************************************\n\n\n");
 
     printf("veuillez consulter nos diverses fonctions et en choisir une:\n");
-    printf("\n    1-  Lecture d'une matrice creuse entière\n");
+    printf("\n    1-  Lecture d'une matrice creuse entiï¿½re\n");
     printf("\n    2-  Extraction d'une sous matrice\n");
-    printf("\n    3-  Division d'une matrice en sous-blocs de taille égale\n");
+    printf("\n    3-  Division d'une matrice en sous-blocs de taille ï¿½gale\n");
     printf("\n    4-  La somme de deux ou plusieur matrices\n");
     printf("\n    5-  Multiplication par un vecteur\n");
     printf("\n    6-  Multiplication de deux matrices\n");
-    printf("\n    7-  Transposée d'une matrice\n");
-    printf("\n    8-  Opérations logiques : NON , ET , OU , OU exclusif\n");
+    printf("\n    7-  Transposï¿½e d'une matrice\n");
+    printf("\n    8-  Opï¿½rations logiques : NON , ET , OU , OU exclusif\n");
 
 
-    printf("\n Alors! que vous voulez faire? entrez le numéro de l'operation : \n");
+    printf("\n Alors! que vous voulez faire? entrez le numï¿½ro de l'operation : \n");
     scanf("%i",&choix);
     int O;
     switch(choix)
     {
     case 1:
-        printf("\n super! maintenant pour créer la matrice on aura besoin de plus d'information sur celle ci: \n");
+        printf("\n super! maintenant pour crï¿½er la matrice on aura besoin de plus d'information sur celle ci: \n");
 
         lecture_ll(&liste,&l,&c);
         afficher_ll(liste,l,c);
-        printf("\n Votre matrice a été sauvgardée dans l'addresse memoire pointée par 'liste' , merci d'avoir utiliser notre programme <3  \n");
+        printf("\n Votre matrice a ï¿½tï¿½ sauvgardï¿½e dans l'addresse memoire pointï¿½e par 'liste' , merci d'avoir utiliser notre programme <3  \n");
         break;
     case 2:
         printf("\n Vous avez choisi l'extraction , veuillez entrer la matrice initiale : \n");
@@ -1897,7 +1897,7 @@ void Menu_2()
         condition(l,c,&dl,&dc,&al,&ac);
         sous_M = extraire(liste,l,c,dl,dc,al,ac);
         afficher_ll(sous_M,al-dl+1,ac-dc+1);
-        printf("\n Votre matrice a été sauvgardée dans l'addresse memoire pointée par 'sous_M' , merci d'avoir utiliser notre programme <3  ");
+        printf("\n Votre matrice a ï¿½tï¿½ sauvgardï¿½e dans l'addresse memoire pointï¿½e par 'sous_M' , merci d'avoir utiliser notre programme <3  ");
         break;
     case 3:
 
@@ -1907,20 +1907,20 @@ void Menu_2()
         afficher_sb(listeB,ls,cs);
         break;
     case 4:
-       printf("\n Vous avez choisi la somme des matrices, veuillez entrer le nombre des matrices à additionner : \n");
+       printf("\n Vous avez choisi la somme des matrices, veuillez entrer le nombre des matrices ï¿½ additionner : \n");
        int num;
        scanf("%i",&num);
        while(num<2){
-        printf("\n Le nombre des matrices doit étre superieur ou égal à 2 ! \n Entrez un nombre valide : ");
+        printf("\n Le nombre des matrices doit ï¿½tre superieur ou ï¿½gal ï¿½ 2 ! \n Entrez un nombre valide : ");
         scanf("%i",&num);
        }
-       printf("\n Entrez la premiére matrice : \n");
+       printf("\n Entrez la premiï¿½re matrice : \n");
        lecture_ll(&l1,&l,&c);
-       printf("\n Entrez la 2éme matrice : \n");
+       printf("\n Entrez la 2ï¿½me matrice : \n");
        lecture_meme(&l2,l,c);
        liste = add(l1,l2,l,c,num);
        afficher_ll(liste,l,c);
-        printf("\n Votre matrice a été sauvgardée dans l'addresse memoire pointée par 'liste' , merci d'avoir utiliser notre programme <3  ");
+        printf("\n Votre matrice a ï¿½tï¿½ sauvgardï¿½e dans l'addresse memoire pointï¿½e par 'liste' , merci d'avoir utiliser notre programme <3  ");
        break;
     case 5:
         printf("Vous avez choisi la multiplication par un vecteur, veuillez entrer votre matrice : ");
@@ -1929,19 +1929,19 @@ void Menu_2()
         lect_vect(&V,l);
         MulV(&liste,V);
         afficher_ll(liste,l,c);
-        printf("\n Votre matrice a été sauvgardée dans l'addresse memoire pointée par 'liste' , merci d'avoir utiliser notre programme <3  ");
+        printf("\n Votre matrice a ï¿½tï¿½ sauvgardï¿½e dans l'addresse memoire pointï¿½e par 'liste' , merci d'avoir utiliser notre programme <3  ");
         break;
     case 6:
-        printf("\n Vous avez choisi la multiplication entre deux matrices, veuillez entrer la premiére matrice :\n  ");
+        printf("\n Vous avez choisi la multiplication entre deux matrices, veuillez entrer la premiï¿½re matrice :\n  ");
         lecture_ll(&liste,&l,&c);
         ptr_l M2,matrice;
         int c2;
-        printf("\n Le nombre des lignes de la deuxieme matrice est conditionnée,\n  par contre vous pouvez choisi le nombre des colones :  ");
+        printf("\n Le nombre des lignes de la deuxieme matrice est conditionnï¿½e,\n  par contre vous pouvez choisi le nombre des colones :  ");
         scanf("%i",&c2);
         lecture_meme(&M2,c,c2);
         matrice = MulM(liste,M2,l,c,c2);
         afficher_ll(matrice,l,c2);
-        printf("\n Votre matrice a été sauvgardée dans l'addresse memoire pointée par 'matrice' , merci d'avoir utiliser notre programme <3 \n ");
+        printf("\n Votre matrice a ï¿½tï¿½ sauvgardï¿½e dans l'addresse memoire pointï¿½e par 'matrice' , merci d'avoir utiliser notre programme <3 \n ");
         break;
     case 7:
 
@@ -1949,23 +1949,23 @@ void Menu_2()
         lecture_ll(&liste,&l,&c);
         tete = transpose(liste,l,c);
         afficher_ll(tete,c,l);
-        printf("\n Votre matrice a été sauvgardée dans l'addresse mémoire pointée par 'liste' , merci d'avoir utiliser notre programme <3  ");
+        printf("\n Votre matrice a ï¿½tï¿½ sauvgardï¿½e dans l'addresse mï¿½moire pointï¿½e par 'liste' , merci d'avoir utiliser notre programme <3  ");
         break;
     case 8:
-        printf("\n Vous avez choisi les opération logique, Veuillez entrer : \n 1 pour le et logique \n 2 pour le non \n 3 pour le ou \n 4 pour le ou execlusif");
+        printf("\n Vous avez choisi les opï¿½ration logique, Veuillez entrer : \n 1 pour le et logique \n 2 pour le non \n 3 pour le ou \n 4 pour le ou execlusif");
         int op;
         scanf("%i",&op);
         switch(op)
         {
         case 1:
-            printf("\nEntrez la premiére matrice : \n");
+            printf("\nEntrez la premiï¿½re matrice : \n");
             lecture_ll(&l1,&l,&c);
-            printf("\nEntrez la deuxiéme matrice :\n") ;
+            printf("\nEntrez la deuxiï¿½me matrice :\n") ;
             lecture_meme(&l2,l,c);
             ptr_l etl;
             etl = et(l1,l2);
             afficher_ll(etl,l,c);
-            printf("\n Votre matrice a été sauvgardée dans l'addresse mémoire pointée par 'etl' , merci d'avoir utiliser notre programme <3  ");
+            printf("\n Votre matrice a ï¿½tï¿½ sauvgardï¿½e dans l'addresse mï¿½moire pointï¿½e par 'etl' , merci d'avoir utiliser notre programme <3  ");
 
             break;
         case 2:
@@ -1974,30 +1974,30 @@ void Menu_2()
             non(&l1,c);
             printf("L'inverse de votre matrice : \n");
             afficher_ll(l1,l,c);
-            printf("\n Votre matrice a été sauvgardée dans l'addresse mémoire pointée par 'l1' , merci d'avoir utiliser notre programme <3  ");
+            printf("\n Votre matrice a ï¿½tï¿½ sauvgardï¿½e dans l'addresse mï¿½moire pointï¿½e par 'l1' , merci d'avoir utiliser notre programme <3  ");
 
             break;
         case 3:
-            printf("\nEntrez la premiére matrice : \n");
+            printf("\nEntrez la premiï¿½re matrice : \n");
             lecture_ll(&l1,&l,&c);
-            printf("\nEntrez la deuxiéme matrice : \n");
+            printf("\nEntrez la deuxiï¿½me matrice : \n");
             lecture_meme(&l2,l,c);
             ptr_l oul;
             oul = ou(l1,l2,c);
             afficher_ll(oul,l,c);
-            printf("\n Votre matrice a été sauvgardée dans l'addresse mémoire pointée par 'oul' , merci d'avoir utiliser notre programme <3  ");
+            printf("\n Votre matrice a ï¿½tï¿½ sauvgardï¿½e dans l'addresse mï¿½moire pointï¿½e par 'oul' , merci d'avoir utiliser notre programme <3  ");
 
             break;
         case 4:
 
-            printf("\nEntrez la premiére matrice : \n");
+            printf("\nEntrez la premiï¿½re matrice : \n");
             lecture_ll(&l1,&l,&c);
-            printf("\nEntrez la deuxiéme matrice : \n");
+            printf("\nEntrez la deuxiï¿½me matrice : \n");
             lecture_meme(&l2,l,c);
             ptr_l ouxl;
             ouxl = oux(l1,l2,c);
             afficher_ll(ouxl,l,c);
-            printf("\n Votre matrice a été sauvgardée dans l'addresse mémoire pointée par 'ouxl' , merci d'avoir utiliser notre programme <3  ");
+            printf("\n Votre matrice a ï¿½tï¿½ sauvgardï¿½e dans l'addresse mï¿½moire pointï¿½e par 'ouxl' , merci d'avoir utiliser notre programme <3  ");
             printf("Le cout : %i",O );
             break;
         }
